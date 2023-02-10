@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cssisst.dao.IAdminDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <resultMap id="amidnmapper" type="Admin">
+        <id column="admin_id" property="id"/>
+        <result column="admin_name" property="name"/>
+        <result column="admin_password" property="password"/>
+        <result column="admin_sex" property="sex"/>
+        <result column="admin_age" property="age"/>
+        <result column="admin_tel" property="tel"/>
+        <result column="admin_pho" property="phone"/>
+        <result column="admin_addr" property="addr"/>
+        <result column="admin_memo" property="memo"/>
+    </resultMap>
+    <select id="getAllAdmin" resultMap="amidnmapper">
+        select admin_id,admin_name,admin_password,admin_sex,admin_age,admin_tel,admin_pho,admin_addr,admin_memo
+        from admin
+    </select>
+    <select id="getAdminByName" resultMap="amidnmapper">
+        select admin_id,admin_name,admin_password,admin_sex,admin_age,admin_tel,admin_pho,admin_addr,admin_memo
+            from admin where admin_name=#{name}
+    </select>
+
+    <select id="getAdminById" resultMap="amidnmapper">
+        select admin_id,admin_name,admin_password,admin_sex,admin_age,admin_tel,admin_pho,admin_addr,admin_memo
+        from admin where admin_id=#{id}
+    </select>
+
+
+    <insert id="save">
+        insert into admin(admin_id,admin_name,admin_password,admin_sex,admin_age,admin_tel,admin_pho,admin_addr,admin_memo)
+            values (#{id},#{name},#{password},#{sex},#{age},#{tel},#{phone},#{addr},#{memo})
+    </insert>
+    <delete id="delete">
+        delete from admin where admin_id=#{id}
+    </delete>
+
+    <update id="update">
+        update admin set admin_password=#{password},admin_sex=#{sex}  where admin_id=#{id}
+    </update>
+</mapper>

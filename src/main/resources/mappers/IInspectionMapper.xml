@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cssisst.dao.IInspectionDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <resultMap id="inspectionmapper" type="Inspection">
+        <id column="i_id" property="id"/>
+        <result column="person" property="person"/>
+        <result column="itype" property="itype"/>
+        <result column="itime" property="itime"/>
+        <result column="conductor" property="conductor"/>
+        <result column="party" property="party"/>
+        <result column="iresult" property="iresult"/>
+        <result column="memo" property="memo"/>
+    </resultMap>
+    <select id="getAllInspection" resultMap="inspectionmapper">
+        select i_id,person,itype,itime,conductor,party,iresult,memo from inspection
+    </select>
+    <insert id="save">
+        insert into inspection(i_id,person,itype,itime,conductor,party,iresult,memo)
+            values (#{id},#{person},#{itype},#{itime},#{conductor},#{party},#{iresult},#{memo})
+    </insert>
+    <delete id="delete">
+        delete from inspection where i_id=#{id}
+    </delete>
+    <select id="getInspectionById" resultMap="inspectionmapper">
+        select i_id,person,itype,itime,conductor,party,iresult,memo from inspection
+        where i_id=#{id}
+    </select>
+
+    <update id="updateinspection">
+        update inspection set person=#{person},itype=#{itype},conductor=#{conductor},party=#{party},iresult=#{iresult},memo=#{memo}
+        where i_id=#{id}
+    </update>
+</mapper>

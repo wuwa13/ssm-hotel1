@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cssisst.dao.IHouseDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <resultMap id="housemapper" type="House">
+        <id column="h_id" property="id"/>
+        <result column="num" property="num"/>
+        <result column="dep" property="dep"/>
+        <result column="htype" property="type"/>
+        <result column="area" property="area"/>
+        <result column="sell" property="sell"/>
+        <result column="unit" property="unit"/>
+        <result column="floor" property="floor"/>
+        <result column="direction" property="direction"/>
+        <result column="memo" property="memo"/>
+        <result column="ownerid" property="ownerid"/>
+    </resultMap>
+    <select id="getAllHouse" resultMap="housemapper">
+        select h_id,num,dep,htype,area,sell,unit,floor,direction,memo,ownerid
+        from house
+    </select>
+    <select id="getHouseByOwnerid" resultMap="housemapper">
+        select h_id,num,dep,htype,area,sell,unit,floor,direction,memo,ownerid
+        from house where ownerid=#{ownerid}
+    </select>
+    <select id="findById" resultMap="housemapper">
+        select h_id,num,dep,htype,area,sell,unit,floor,direction,memo,ownerid
+        from house where h_id=#{id}
+    </select>
+    <insert id="add">
+        insert into house(h_id,num,dep,htype,area,sell,unit,floor,direction,memo,ownerid)
+            values (#{id},#{num},#{dep},#{type},#{area},#{sell},#{unit},#{floor},#{direction},#{memo},#{ownerid})
+    </insert>
+    <delete id="delete">
+        delete from house where h_id=#{id}
+    </delete>
+    <update id="update">
+        update house set num=#{num},dep=#{dep},htype=#{type},area=#{area},sell=#{sell},unit=#{unit},
+                         floor=#{floor},direction=#{direction},memo=#{memo},ownerid=#{ownerid}
+        where h_id=#{id}
+    </update>
+</mapper>

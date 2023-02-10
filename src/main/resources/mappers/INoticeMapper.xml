@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cssisst.dao.INoticeDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+   <resultMap id="noticemapper" type="com.cssisst.entity.Notice">
+       <id column="n_id" property="id"/>
+       <result column="content" property="content"/>
+       <result column="ndate" property="ndate"/>
+       <result column="title" property="title"/>
+   </resultMap>
+
+    <select id="FindAll" resultMap="noticemapper">
+        select n_id,content,ndate,title,uper from notice
+    </select>
+    <select id="Select" resultMap="noticemapper">
+        select n_id,content,ndate,title,uper from notice
+            where content=#{content}
+    </select>
+
+    <insert id="Add">
+        insert into notice(n_id,content,ndate,title,uper)
+            values (#{id},#{content},#{ndate},#{title},#{uper})
+    </insert>
+    <delete id="Delete">
+        delete from notice where n_id=#{id}
+    </delete>
+    <select id="findById" resultMap="noticemapper">
+        select n_id,content,ndate,title,uper from notice
+        where n_id=#{id}
+    </select>
+    <update id="updatenotice">
+        update notice set content=#{content},ndate=#{ndate},title=#{title},uper=#{uper}
+            where n_id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cssisst.dao.ICustomAccountDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <resultMap id="icu_acc" type="CustomAccount">
+        <id column="account_id" property="accountid"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="ownerid" property="ownerid"/>
+        <result column="carid" property="carid"/>
+    </resultMap>
+    <select id="getALLcustomAccount" resultMap="icu_acc">
+        select account_id,username,password,ownerid,carid
+            from custom_account
+    </select>
+    <insert id="save">
+        insert into custom_account(account_id,username,password,ownerid,carid)
+            values(#{accountid},#{username},#{password},#{ownerid},#{carid})
+    </insert>
+    <delete id="delete">
+        delete from custom_account where account_id=#{account_id}
+    </delete>
+
+    <select id="getCustomAccountByName" resultMap="icu_acc">
+       select account_id,username,password,ownerid,carid
+        from custom_account where username=#{name}
+    </select>
+
+    <select id="getCustomAccountById" resultMap="icu_acc">
+        select account_id,username,password,ownerid,carid
+        from custom_account where account_id=#{accountid}
+    </select>
+    <update id="update">
+        update custom_account set username=#{username},password=#{password},ownerid=#{ownerid},carid=#{carid} where account_id=#{accountid}
+    </update>
+</mapper>
